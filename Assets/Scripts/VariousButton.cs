@@ -8,12 +8,6 @@ public class VariousButton : MonoBehaviour
     public GameObject endPanel;
     public GameObject rankingBoard;
 
-    //재시작 버튼
-    public void Retry()
-    {
-        SceneManager.LoadScene("MainScene");
-    }
-
     //랭킹 보드 버튼
     public void GoToRaningBoard()
     {
