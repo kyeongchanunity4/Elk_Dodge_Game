@@ -15,12 +15,24 @@ public class Car : MonoBehaviour
         float y = 5.5f;
         rb = GetComponent<Rigidbody2D>();
 
-        if ( x < 0.0f && x >= -2.0f)
+        if ( x < -1.35f && x >= -2.0f)
         {
+            x = -1.95f;
             transform.position = new Vector2(x, y);
         }
-        else if( x>=0.0f && x <= 2.0f)
+        else if (x < 0.0f && x>= -1.35f)
         {
+            x = -0.75f;
+            transform.position = new Vector2(x, y);
+        }
+        else if( x < 1.35f && x >= 0.0f)
+        {
+            x = 0.75f;
+            transform.position = new Vector2(x, -y);
+        }
+        else if (x < 1.35f && x >= 2.0f)
+        {
+            x = 1.95f;
             transform.position = new Vector2(x, -y);
         }
     }
