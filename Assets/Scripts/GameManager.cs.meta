@@ -3,7 +3,16 @@ guid: 0817f950ddc74514399314a986b3282b
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - car1: {instanceID: 0}
+  - BlueCar: {instanceID: 0}
+  - Bulldozer: {instanceID: 0}
+  - endPanel: {instanceID: 0}
+  - rankingBoard: {instanceID: 0}
+  - playerScore: {instanceID: 0}
+  - timeTxt: {instanceID: 0}
+  - NowScore: {instanceID: 0}
+  - BestScore: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

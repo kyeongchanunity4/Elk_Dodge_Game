@@ -7,6 +7,7 @@ public class Car : MonoBehaviour
     float forceGravity = 3.0f;
 
     Rigidbody2D rb;
+    SpriteRenderer spriteRenderer;
 
     // 자동차가 나오는 위치
     void Start()
@@ -14,6 +15,7 @@ public class Car : MonoBehaviour
         float x = Random.Range(-2.0f, 2.0f);
         float y = 5.5f;
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         if ( x < -1.35f && x >= -2.0f)
         {
@@ -29,6 +31,10 @@ public class Car : MonoBehaviour
         {
             x = 0.75f;
             transform.position = new Vector2(x, -y);
+            //자동차가 역방향으로 올때 자동차의 방향 전환+뒤집어서 그림자 방향 맞춰 줌
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, -180));
+            spriteRenderer.flipX = true;
+            
         }
         else if (x < 1.35f && x >= 2.0f)
         {
