@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     bool isPlay = true;
 
+    float gameTime = 0f;
     float time = 0f;
     string key = "BestScore";
 
@@ -41,9 +42,29 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         Application.targetFrameRate = 60;
-        InvokeRepeating("MakeCar", 0.0f, 1.0f);
         endPanel.SetActive(false);
         rankingBoard.SetActive(false);
+
+        gameTime += Time.deltaTime;
+        InvokeRepeating("MakeCar", 0.0f, 1.0f); //자동차만 랜덤으로 나온다.
+
+        /*
+        switch (gameTime / 30.0f) //시간이 30초 지날때마다 난이도 증가
+        {
+            case 0: //게임 1단계
+                InvokeRepeating("MakeCar", 0.0f, 1.0f); //자동차만 랜덤으로 나온다.
+                break;
+            case 1: //30초가 지나면 게임 2단계
+                //자동차와 오토바이가 랜덤으로 나온다
+                break;
+            case 2: //60초가 지나면 게임 3단계
+                //자동차와 오토바이, 덤프트럭이 나온다.
+                break;
+            default: //90초가 지나면 게임 4단계
+                //자동차와 오토바이, 덤프트럭, 불도저가 나온다.
+                break;
+        }
+        */
     }
 
     void Update()
@@ -59,6 +80,24 @@ public class GameManager : MonoBehaviour
     void MakeCar()
     {
         Instantiate(car1);
+    }
+
+    //오토바이 호출하는 메서드
+    void MakeMotorcycle()
+    {
+
+    }
+
+    //덤프트럭 호출하는 메서드
+    void MakeDumpTruck()
+    {
+
+    }
+
+    //불도저 호출하는 메서드
+    void bulldozer()
+    {
+
     }
 
     //게임 종료 됐을 시
