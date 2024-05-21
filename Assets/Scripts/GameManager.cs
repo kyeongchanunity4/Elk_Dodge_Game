@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject car1;
     public GameObject endPanel;
-    public GameObject rankingBoard;
-    
+    public GameObject gameOverScene;
+
     private float[] bestScore = new float[5];
     public float[] rankScore = new float[5];
     public float recordTime;
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
         Application.targetFrameRate = 60;
         endPanel.SetActive(false);
-        rankingBoard.SetActive(false);
+        gameOverScene.SetActive(false);
 
         gameTime += Time.deltaTime;
         InvokeRepeating("MakeCar", 0.0f, 1.0f); //자동차만 랜덤으로 나온다.
@@ -103,6 +103,7 @@ public class GameManager : MonoBehaviour
     //게임 종료 됐을 시
     public void GameOver()
     {
+        float overTime = 0;
         isPlay = false;
         Time.timeScale = 0.0f; //게임 종료 처리
         NowScore.text = time.ToString("N2"); //버틴 시간 만큼 현재 기록에 표시
@@ -131,8 +132,8 @@ public class GameManager : MonoBehaviour
         //플레이어의 시간을 저장
         PlayerPrefs.SetFloat("recordTime", time);
 
-        //게임이 종료되면 엔드 판넬 활성화
-        endPanel.SetActive(true); 
+        //게임이 종료되면 엔드 판넬 활성화   
+        endPanel.SetActive(true);
     }
 
     public void ScoreSet()
