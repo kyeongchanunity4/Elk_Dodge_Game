@@ -8,6 +8,14 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public GameObject car1;
+    public GameObject BlueCar;
+    public GameObject Bulldozer;
+    public GameObject DumpTruck;
+    public GameObject motorbikeblack;
+    public GameObject MotorBikeRed;
+    public GameObject PurpleCar;
+    public GameObject YellowCar;
+
     public GameObject endPanel;
     public GameObject gameOverScene;
 
@@ -80,6 +88,14 @@ public class GameManager : MonoBehaviour
     void MakeCar()
     {
         Instantiate(car1);
+        Instantiate(BlueCar);
+        Instantiate(Bulldozer);
+        Instantiate(DumpTruck);
+        Instantiate(motorbikeblack);
+        Instantiate(MotorBikeRed);
+        Instantiate(PurpleCar);
+        Instantiate(YellowCar);
+
     }
 
     //오토바이 호출하는 메서드

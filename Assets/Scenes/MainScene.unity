@@ -458,6 +458,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   car1: {fileID: 2874468898895481082, guid: b94451b6ca7022f49a0d339a98bc7095, type: 3}
+  BlueCar: {fileID: 8204554243939022780, guid: 3c6c90a2619a4044cbbaa802bcb9ed9f, type: 3}
+  Bulldozer: {fileID: 0}
+  DumpTruck: {fileID: 0}
+  motorbikeblack: {fileID: 0}
+  MotorBikeRed: {fileID: 0}
+  PurpleCar: {fileID: 0}
+  YellowCar: {fileID: 0}
   endPanel: {fileID: 1194983613}
   rankingBoard: {fileID: 0}
   rankScore:
@@ -1141,7 +1148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &839133707
 MonoBehaviour:
   m_ObjectHideFlags: 0
