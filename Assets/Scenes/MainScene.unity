@@ -149,7 +149,7 @@ Transform:
   m_GameObject: {fileID: 66136326}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -10, z: 0}
+  m_LocalPosition: {x: 0, y: -20, z: 0}
   m_LocalScale: {x: 0.79, y: 0.79, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -459,14 +459,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   car1: {fileID: 2874468898895481082, guid: b94451b6ca7022f49a0d339a98bc7095, type: 3}
   BlueCar: {fileID: 8204554243939022780, guid: 3c6c90a2619a4044cbbaa802bcb9ed9f, type: 3}
-  Bulldozer: {fileID: 0}
-  DumpTruck: {fileID: 0}
-  motorbikeblack: {fileID: 0}
-  MotorBikeRed: {fileID: 0}
-  PurpleCar: {fileID: 0}
-  YellowCar: {fileID: 0}
+  Bulldozer: {fileID: 5962408725005450056, guid: 58c09a5c66b29b84aad0e8fe8351bc60, type: 3}
+  DumpTruck: {fileID: 5452079418812107545, guid: 5582ee59496327a49a3996e82b110245, type: 3}
+  motorbikeblack: {fileID: 1608595503941168682, guid: bde2458a240576f429112e4219c78707, type: 3}
+  MotorBikeRed: {fileID: 8295934271121151840, guid: 9ab1df5e58032d94ebee23ad7eed7e94, type: 3}
+  PurpleCar: {fileID: 70120573100426465, guid: bf642c6e23cfd2741b2dc94296f10d45, type: 3}
+  YellowCar: {fileID: 6404486397488928579, guid: 6a6143bc2749a7741ab33dcb781e3d33, type: 3}
   endPanel: {fileID: 1194983613}
-  rankingBoard: {fileID: 0}
+  gameOverScene: {fileID: 2018456486}
   rankScore:
   - 0
   - 0
@@ -1148,7 +1148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &839133707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1735,7 +1735,7 @@ Transform:
   m_GameObject: {fileID: 1251471310}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalPosition: {x: 0, y: 20, z: 0}
   m_LocalScale: {x: 0.79, y: 0.79, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2299,7 +2299,7 @@ Transform:
   m_GameObject: {fileID: 1715174720}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 20, z: 0}
+  m_LocalPosition: {x: 0, y: 40, z: 0}
   m_LocalScale: {x: 0.79, y: 0.79, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

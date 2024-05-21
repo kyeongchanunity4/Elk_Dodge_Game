@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1946866951993693724}
   - component: {fileID: 4813013508630669565}
-  - component: {fileID: 2298489695918046501}
   - component: {fileID: 5572893120985902099}
   - component: {fileID: 8052923947598171490}
+  - component: {fileID: 7868864085957086455}
   m_Layer: 0
   m_Name: PurpleCar
   m_TagString: Untagged
@@ -88,18 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2298489695918046501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 70120573100426465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a154ccbef6bbfd54b803a22afb7807d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &5572893120985902099
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -172,6 +160,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7868864085957086455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70120573100426465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f3e639dcf1bca44b8409aa87f6448d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8780322832423499652
 GameObject:
   m_ObjectHideFlags: 0

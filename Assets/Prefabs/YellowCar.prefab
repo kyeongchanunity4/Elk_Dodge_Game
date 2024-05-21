@@ -94,9 +94,9 @@ GameObject:
   m_Component:
   - component: {fileID: 513589480758314387}
   - component: {fileID: 3655310054277890107}
-  - component: {fileID: 3715481909681604192}
   - component: {fileID: 7135250452500619320}
   - component: {fileID: 5748154813257946758}
+  - component: {fileID: 5026708054635221922}
   m_Layer: 0
   m_Name: YellowCar
   m_TagString: Untagged
@@ -172,18 +172,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3715481909681604192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6404486397488928579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a154ccbef6bbfd54b803a22afb7807d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &7135250452500619320
 Rigidbody2D:
   serializedVersion: 4
@@ -256,3 +244,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.81, y: 1.77}
   m_EdgeRadius: 0
+--- !u!114 &5026708054635221922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6404486397488928579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f3e639dcf1bca44b8409aa87f6448d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

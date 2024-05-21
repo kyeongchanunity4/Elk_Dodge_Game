@@ -44,17 +44,22 @@ public class GameManager : MonoBehaviour
                 Instance = this;
             }
         }
+
+        Application.targetFrameRate = 60;
     }
 
     void Start()
     {
         Time.timeScale = 1.0f;
-        Application.targetFrameRate = 60;
         endPanel.SetActive(false);
         gameOverScene.SetActive(false);
 
         gameTime += Time.deltaTime;
-        InvokeRepeating("MakeCar", 0.0f, 1.0f); //자동차만 랜덤으로 나온다.
+
+        InvokeRepeating("MakeCar_Level1", 0.0f, 1.5f); //자동차가 랜덤으로 나온다.
+        InvokeRepeating("MakeCar_Level2", 0.0f, 3.0f); //오토바이가 랜덤으로 나온다.
+
+        
 
         /*
         switch (gameTime / 30.0f) //시간이 30초 지날때마다 난이도 증가
@@ -85,23 +90,20 @@ public class GameManager : MonoBehaviour
     }
 
     //자동차 호출하는 메서드
-    void MakeCar()
+    void MakeCar_Level1()
     {
-        Instantiate(car1);
-        Instantiate(BlueCar);
-        Instantiate(Bulldozer);
-        Instantiate(DumpTruck);
-        Instantiate(motorbikeblack);
-        Instantiate(MotorBikeRed);
-        Instantiate(PurpleCar);
-        Instantiate(YellowCar);
-
+        float p = Random.Range(0, 10);
+        if (p >= 0 && p < 3) Instantiate(BlueCar);
+        else if (p >= 3 && p < 7) Instantiate(PurpleCar);
+        else if (p >= 7 && p < 10) Instantiate(YellowCar);
     }
 
     //오토바이 호출하는 메서드
-    void MakeMotorcycle()
+    void MakeCar_Level2()
     {
-
+        float p = Random.Range(0, 10);
+        if (p >= 0 && p < 3) Instantiate(MotorBikeRed);
+        else if (p >= 7 && p < 10) Instantiate(motorbikeblack);
     }
 
     //덤프트럭 호출하는 메서드
