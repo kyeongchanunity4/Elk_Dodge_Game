@@ -8,17 +8,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public GameObject car1;
-    public GameObject BlueCar;
-    public GameObject Bulldozer;
-    public GameObject DumpTruck;
-    public GameObject motorbikeblack;
-    public GameObject MotorBikeRed;
-    public GameObject PurpleCar;
-    public GameObject YellowCar;
-
     public GameObject endPanel;
-    public GameObject gameOverScene;
-
+    public GameObject rankingBoard;
+    
     private float[] bestScore = new float[5];
     public float[] rankScore = new float[5];
     public float recordTime;
@@ -29,9 +21,15 @@ public class GameManager : MonoBehaviour
     public Text NowScore;
     public Text BestScore;
 
+    public int item1Hav;
+    public int item2Hav;
+    public int item3Hav;
+
+    public bool isItem1Active = false;
+    public bool isItem2Active = false;
+
     bool isPlay = true;
 
-    float gameTime = 0f;
     float time = 0f;
     string key = "BestScore";
 
@@ -44,40 +42,15 @@ public class GameManager : MonoBehaviour
                 Instance = this;
             }
         }
-
-        Application.targetFrameRate = 60;
     }
 
     void Start()
     {
         Time.timeScale = 1.0f;
+        Application.targetFrameRate = 60;
+        InvokeRepeating("MakeCar", 0.0f, 1.0f);
         endPanel.SetActive(false);
-        gameOverScene.SetActive(false);
-
-        gameTime += Time.deltaTime;
-
-        InvokeRepeating("MakeCar_Level1", 0.0f, 1.5f); //ÀÚµ¿Â÷°¡ ·£´ýÀ¸·Î ³ª¿Â´Ù.
-        InvokeRepeating("MakeCar_Level2", 0.0f, 3.0f); //¿ÀÅä¹ÙÀÌ°¡ ·£´ýÀ¸·Î ³ª¿Â´Ù.
-
-        
-
-        /*
-        switch (gameTime / 30.0f) //½Ã°£ÀÌ 30ÃÊ Áö³¯¶§¸¶´Ù ³­ÀÌµµ Áõ°¡
-        {
-            case 0: //°ÔÀÓ 1´Ü°è
-                InvokeRepeating("MakeCar", 0.0f, 1.0f); //ÀÚµ¿Â÷¸¸ ·£´ýÀ¸·Î ³ª¿Â´Ù.
-                break;
-            case 1: //30ÃÊ°¡ Áö³ª¸é °ÔÀÓ 2´Ü°è
-                //ÀÚµ¿Â÷¿Í ¿ÀÅä¹ÙÀÌ°¡ ·£´ýÀ¸·Î ³ª¿Â´Ù
-                break;
-            case 2: //60ÃÊ°¡ Áö³ª¸é °ÔÀÓ 3´Ü°è
-                //ÀÚµ¿Â÷¿Í ¿ÀÅä¹ÙÀÌ, ´ýÇÁÆ®·°ÀÌ ³ª¿Â´Ù.
-                break;
-            default: //90ÃÊ°¡ Áö³ª¸é °ÔÀÓ 4´Ü°è
-                //ÀÚµ¿Â÷¿Í ¿ÀÅä¹ÙÀÌ, ´ýÇÁÆ®·°, ºÒµµÀú°¡ ³ª¿Â´Ù.
-                break;
-        }
-        */
+        rankingBoard.SetActive(false);
     }
 
     void Update()
@@ -89,119 +62,95 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //ÀÚµ¿Â÷ È£ÃâÇÏ´Â ¸Þ¼­µå
-    void MakeCar_Level1()
+    //ï¿½Úµï¿½ï¿½ï¿½ È£ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
+    void MakeCar()
     {
-        float p = Random.Range(0, 10);
-        if (p >= 0 && p < 3) Instantiate(BlueCar);
-        else if (p >= 3 && p < 7) Instantiate(PurpleCar);
-        else if (p >= 7 && p < 10) Instantiate(YellowCar);
+        Instantiate(car1);
     }
 
-    //¿ÀÅä¹ÙÀÌ È£ÃâÇÏ´Â ¸Þ¼­µå
-    void MakeCar_Level2()
-    {
-        float p = Random.Range(0, 10);
-        if (p >= 0 && p < 3) Instantiate(MotorBikeRed);
-        else if (p >= 7 && p < 10) Instantiate(motorbikeblack);
-    }
-
-    //´ýÇÁÆ®·° È£ÃâÇÏ´Â ¸Þ¼­µå
-    void MakeDumpTruck()
-    {
-
-    }
-
-    //ºÒµµÀú È£ÃâÇÏ´Â ¸Þ¼­µå
-    void bulldozer()
-    {
-
-    }
-
-    //°ÔÀÓ Á¾·á µÆÀ» ½Ã
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
     public void GameOver()
     {
-        float overTime = 0;
         isPlay = false;
-        Time.timeScale = 0.0f; //°ÔÀÓ Á¾·á Ã³¸®
-        NowScore.text = time.ToString("N2"); //¹öÆ¾ ½Ã°£ ¸¸Å­ ÇöÀç ±â·Ï¿¡ Ç¥½Ã
+        Time.timeScale = 0.0f; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
+        NowScore.text = time.ToString("N2"); //ï¿½ï¿½Æ¾ ï¿½Ã°ï¿½ ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ï¿ï¿½ Ç¥ï¿½ï¿½
 
-        //ÃÖ°í Á¡¼ö°¡ ÀÖ´Ù¸é
+        //ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½
         if (PlayerPrefs.HasKey(key))
         {
             float best = PlayerPrefs.GetFloat(key);
-            if (best < time) //ÇöÀç Á¡¼ö°¡ ÃÖ°í Á¡¼öº¸´Ù ³ôÀ» °æ¿ì
+            if (best < time) //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
             {
-                PlayerPrefs.SetFloat(key, time); //ÇöÀç Á¡¼ö¸¦ ÃÖ°í Á¡¼ö¿¡ ÀúÀå
-                BestScore.text = time.ToString("N2"); //ÇöÀç Á¡¼ö¸¦ ÃÖ°í Á¤¼ö¿¡ º¸¿©ÁØ´Ù.
+                PlayerPrefs.SetFloat(key, time); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                BestScore.text = time.ToString("N2"); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
             }
-            else //ÇöÀç Á¡¼ö°¡ ÃÖ°í Á¡¼öº¸´Ù ³·À» °æ¿ì (ÀúÀå ¾ÈÇÔ)
+            else //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
             {
-                BestScore.text = best.ToString("N2"); //ÀúÀåµÈ ÃÖ°í Á¡¼ö¸¦ º¸¿©ÁØ´Ù.
+                BestScore.text = best.ToString("N2"); //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
             }
         }
-        //ÃÖ°í Á¡¼ö°¡ ¾ø´Ù¸é
+        //ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½
         else
         {
-            PlayerPrefs.SetFloat(key, time); //ÇöÀç Á¡¼ö¸¦ ÃÖ°í Á¡¼ö¿¡ ÀúÀå
-            BestScore.text = time.ToString("N2"); //ÇöÀç Á¡¼ö¸¦ ÃÖ°í Á¤¼ö¿¡ º¸¿©ÁØ´Ù.
+            PlayerPrefs.SetFloat(key, time); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            BestScore.text = time.ToString("N2"); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
         }
 
-        //ÇÃ·¹ÀÌ¾îÀÇ ½Ã°£À» ÀúÀå
+        //ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         PlayerPrefs.SetFloat("recordTime", time);
 
-        //°ÔÀÓÀÌ Á¾·áµÇ¸é ¿£µå ÆÇ³Ú È°¼ºÈ­   
-        endPanel.SetActive(true);
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³ï¿½ È°ï¿½ï¿½È­
+        endPanel.SetActive(true); 
     }
 
     public void ScoreSet()
     {
         float currentTime = PlayerPrefs.GetFloat("recordTime");
-        //ÀÏ´Ü ÇöÀç¿¡ ÀúÀåÇÏ°í ½ÃÀÛ
+        //ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ç¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½
         PlayerPrefs.SetFloat("CurrentPlayerTime", currentTime);
 
         float tmpTime = 0f;
 
         for (int i = 0; i < 5; i++)
         {
-            //ÀúÀåµÈ ÃÖ°í Á¡¼ö¿Í ÀÌ¸§À» °¡Á®¿À±â
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             bestScore[i] = PlayerPrefs.GetFloat(i + "BestScore");
 
-            //ÇöÀç Á¡¼ö°¡ ·©Å·¿¡ ¿À¸¦ ¼ö ÀÖÀ» ¶§
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
             while (bestScore[i] < currentTime)
             {
-                //ÀÚ¸® ¹Ù²Ù±â
+                //ï¿½Ú¸ï¿½ ï¿½Ù²Ù±ï¿½
                 tmpTime = bestScore[i];
                 bestScore[i] = currentTime;
 
-                //·©Å·¿¡ ÀúÀå
+                //ï¿½ï¿½Å·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 PlayerPrefs.SetFloat(i + "BestScore", currentTime);
 
-                //´ÙÀ½ ¹Ýº¹À» À§ÇÑ ÁØºñ
+                //ï¿½ï¿½ï¿½ï¿½ ï¿½Ýºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Øºï¿½
                 currentTime = tmpTime;
             }
         }
 
-        //·©Å·¿¡ ¸ÂÃç Á¡¼ö¿Í ÀÌ¸§ ÀúÀå
+        //ï¿½ï¿½Å·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½
         for (int i = 0; i < 5; i++)
         {
             PlayerPrefs.SetFloat(i + "BestScore", bestScore[i]);
         }
     }
 
-    //·©Å· º¸µå
+    //ï¿½ï¿½Å· ï¿½ï¿½ï¿½ï¿½
     public void Board()
     {
-        //ÇÃ·¹ÀÌ¾îÀÇ Á¡¼ö ÅØ½ºÆ®¸¦ ÇöÀç '³ª'ÀÇ Á¡¼ö¿¡ Ç¥½Ã
+        //ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 'ï¿½ï¿½'ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
         playerScore.text = PlayerPrefs.GetString("CurrentPlayerScore");
 
-        //·©Å·¿¡ ¸ÂÃç ºÒ·¯¿Â Á¡¼ö Ç¥½Ã
+        //ï¿½ï¿½Å·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
         for (int i = 0; i < 5; i++)
         {
             rankScore[i] = PlayerPrefs.GetFloat(i + "BestScore");
             RankScoreText[i].text = string.Format("{0:N3}cm", rankScore[i]);
 
-            //·©Å· °­Á¶ Ç¥½Ã
+            //ï¿½ï¿½Å· ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
             if (playerScore.text == RankScoreText[i].text)
             {
                 Color Rank = new Color(255, 255, 0);

@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class BackgroundScrolling : MonoBehaviour
 {
-    public float scrollSpeed; //¹è°æµéÀÌ ¿òÁ÷ÀÏ ¼Óµµ¸¦ Á¤ÀÇÇÑ º¯¼ö
-    public Transform[] backgrounds; //¹è°æµéÀ» ´ã¾ÆÁÙ º¯¼ö
+    public float scrollSpeed; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public float Item2ScrollSpeed = 0.8f;
+    public Transform[] backgrounds; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-    float upPosY = 0f; // ¹è°æÀÇ ³¡ yÁÂÇ¥¸¦ ´ã¾ÆÁÙ º¯¼ö
-    float downPosY = 0f; // ¹è°æÀÇ ½ÃÀÛ yÁÂÇ¥¸¦ ´ã¾ÆÁÙ º¯¼ö
-    float xScreenHalfSize; //°ÔÀÓ È­¸éÀÇ xÁÂÇ¥ Àý¹ÝÀ» ´ã¾ÆÁÙ º¯¼ö
-    float yScreenHalfSize; //°ÔÀÓ È­¸éÀÇ yÁÂÇ¥ Àý¹ÝÀ» ´ã¾ÆÁÙ º¯¼ö
+    float upPosY = 0f; // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ yï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    float downPosY = 0f; // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ yï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    float xScreenHalfSize; //ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ xï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    float yScreenHalfSize; //ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ yï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-    //¹é±×¶ó¿îµå ½ºÅ©·Ñ¸µ¿¡ »ç¿ëµÇ´Â È­¸é ÁÂÇ¥µéÀÇ °ªÀ» ÃÊ±âÈ­
+    //ï¿½ï¿½×¶ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½Ñ¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç´ï¿½ È­ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
     void Start()
     {
         yScreenHalfSize = Camera.main.orthographicSize;
@@ -25,15 +26,33 @@ public class BackgroundScrolling : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0; i<backgrounds.Length; i++)
+        if (!GameManager.Instance.isItem2Active)
         {
-            backgrounds[i].position += new Vector3(0, -scrollSpeed, 0) * Time.deltaTime;
-
-            if (backgrounds[i].position.y < downPosY)
+            for (int i = 0; i < backgrounds.Length; i++)
             {
-                Vector3 nextPos = backgrounds[i].position;
-                nextPos = new Vector3(nextPos.x, nextPos.y + upPosY, nextPos.z);
-                backgrounds[i].position = nextPos;
+                backgrounds[i].position += new Vector3(0, -scrollSpeed, 0) * Time.deltaTime;
+
+                if (backgrounds[i].position.y < downPosY)
+                {
+                    Vector3 nextPos = backgrounds[i].position;
+                    nextPos = new Vector3(nextPos.x, nextPos.y + upPosY, nextPos.z);
+                    backgrounds[i].position = nextPos;
+                }
+            }
+        }
+
+        else
+        {
+            for (int i = 0; i < backgrounds.Length; i++)
+            {
+                backgrounds[i].position += new Vector3(0, -Item2ScrollSpeed, 0) * Time.deltaTime;
+
+                if (backgrounds[i].position.y < downPosY)
+                {
+                    Vector3 nextPos = backgrounds[i].position;
+                    nextPos = new Vector3(nextPos.x, nextPos.y + upPosY, nextPos.z);
+                    backgrounds[i].position = nextPos;
+                }
             }
         }
     }

@@ -4,51 +4,36 @@ using UnityEngine;
 
 public class Car : MonoBehaviour
 {
-    float speed;
-
+    float forceGravity = 3.0f;
+    float item2ForceGravity = 0.5f;
+    public bool isItem1Active;
     Rigidbody2D rb;
-    SpriteRenderer spriteRenderer;
 
-    // ÀÚµ¿Â÷°¡ ³ª¿À´Â À§Ä¡
+    private bool isRotation = false;
+    private float RotateSpeed = 360f;
+
+    // ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
     void Start()
     {
         float x = Random.Range(-2.0f, 2.0f);
         float y = 5.5f;
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
 
-        if ( x < -1.35f && x >= -2.0f)
+        if ( x < -0.45f && x >= -2.0f)
         {
-            x = -1.95f;
             transform.position = new Vector2(x, y);
         }
-        else if (x < 0.0f && x>= -1.35f)
+        else if( x>=0.45f && x <= 2.0f)
         {
-            x = -0.75f;
-            transform.position = new Vector2(x, y);
-        }
-        else if( x < 1.35f && x >= 0.0f)
-        {
-            x = 0.75f;
             transform.position = new Vector2(x, -y);
-            //ÀÚµ¿Â÷°¡ ¿ª¹æÇâÀ¸·Î ¿Ã¶§ ÀÚµ¿Â÷ÀÇ ¹æÇâ ÀüÈ¯+µÚÁý¾î¼­ ±×¸²ÀÚ ¹æÇâ ¸ÂÃç ÁÜ
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, -180));
-            spriteRenderer.flipX = true;
-            
-        }
-        else if (x < 2.0f && x >= 1.35f)
-        {
-            x = 1.95f;
-            transform.position = new Vector2(x, -y);
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, -180));
-            spriteRenderer.flipX = true;
         }
     }
 
-    // Â÷°¡ °í¶ó´Ï ÂÊÀ¸·Î ÁÖÇà Áß
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
     void Update()
     {
-        //Â÷°¡ È­¸é ¹ÛÀ¸·Î ³ª°¡¸é »èÁ¦
+        isItem1Active = GameManager.Instance.isItem1Active;
+        //ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (transform.position.y < -5.6f)
         {
             Destroy(gameObject);
@@ -57,6 +42,11 @@ public class Car : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if(isRotation == true)
+        {
+            transform.Rotate(Vector3.forward, RotateSpeed * Time.deltaTime);
+        }
     }
 
 
@@ -64,23 +54,71 @@ public class Car : MonoBehaviour
     {
         if (transform.position.x < 0.0f && transform.position.x >= -2.0f)
         {
-            rb.AddForce(Vector3.down * speed);
+            if (!GameManager.Instance.isItem2Active)
+            {
+                rb.AddForce(Vector3.down * forceGravity);
+            }
+            else
+            {
+                rb.AddForce(Vector3.down * item2ForceGravity);
+            }
 
         }
         else if (transform.position.x >= 0.0f && transform.position.x <= 2.0f)
         {
-            rb.AddForce(Vector3.up * speed);
+            if (!GameManager.Instance.isItem2Active)
+            {
+                rb.AddForce(Vector3.up * forceGravity);
+            }
+            else
+            {
+                rb.AddForce(Vector3.up * item2ForceGravity);
+            }
         }
     }
 
 
-    //Â÷°¡ °í¶ó´Ï(ÇÃ·¹ÀÌ¾î)¸¦ ÃÆÀ» °æ¿ì
-    private void OnCollisionEnter2D(Collision2D collision) 
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½Ã·ï¿½ï¿½Ì¾ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player")) 
+        if (!isItem1Active)
         {
-            //°ÔÀÓ Á¾·á ¸Þ¼­µå ½ÇÇà
-            GameManager.Instance.GameOver();
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                if (GameManager.Instance.item3Hav >= 1)
+                {
+                    GameManager.Instance.item3Hav -= 1;
+                    DestroyCar();
+                }
+
+                else
+                {
+                    GameManager.Instance.GameOver();
+                }
+            }
         }
+
+        else
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                DestroyCar();
+            }
+        }
+    }
+
+    private void DestroyCar()
+    {
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        Collider2D collider = GetComponent<Collider2D>();
+        
+        Destroy(collider);
+
+        rb.gravityScale = 2.0f;
+
+        Vector2 initialVelocity = new Vector2(Random.Range(-2.0f,2.0f),Random.Range(6.0f,10.0f));
+        rb.AddForce(initialVelocity, ForceMode2D.Impulse);
+
+        isRotation = true;
     }
 }
