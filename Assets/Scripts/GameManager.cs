@@ -29,13 +29,6 @@ public class GameManager : MonoBehaviour
     public Text NowScore;
     public Text BestScore;
 
-    public int item1Hav;
-    public int item2Hav;
-    public int item3Hav;
-
-    public bool isItem1Active = false;
-    public bool isItem2Active = false;
-
     bool isPlay = true;
 
     float gameTime = 0f;
