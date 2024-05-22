@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5408769922748662852}
   - component: {fileID: 6397974636954727238}
   - component: {fileID: 8710848003952230183}
-  - component: {fileID: 1035240484815422514}
+  - component: {fileID: 2628680167877720088}
   m_Layer: 0
   m_Name: Bulldozer
   m_TagString: Untagged
@@ -244,7 +244,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.39, y: 3.65}
   m_EdgeRadius: 0
---- !u!114 &1035240484815422514
+--- !u!114 &2628680167877720088
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -253,6 +253,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5962408725005450056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a154ccbef6bbfd54b803a22afb7807d4, type: 3}
+  m_Script: {fileID: 11500000, guid: eaa3138d552fa414bb57844ad9a00dbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

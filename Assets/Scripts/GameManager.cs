@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public GameObject car1;
     public GameObject BlueCar;
     public GameObject Bulldozer;
     public GameObject DumpTruck;
@@ -19,8 +18,9 @@ public class GameManager : MonoBehaviour
     public GameObject endPanel;
     public GameObject gameOverScene;
 
-    private float[] bestScore = new float[5];
-    public float[] rankScore = new float[5];
+    private float[] bestTime = new float[5];
+    private float[] rankScore = new float[5];
+    public string[] bestName = new string[5];
     public float recordTime;
 
     public Text[] RankScoreText;
@@ -28,6 +28,13 @@ public class GameManager : MonoBehaviour
     public Text timeTxt;
     public Text NowScore;
     public Text BestScore;
+
+    public int item1Hav;
+    public int item2Hav;
+    public int item3Hav;
+
+    public bool isItem1Active = false;
+    public bool isItem2Active = false;
 
     bool isPlay = true;
 
@@ -56,28 +63,7 @@ public class GameManager : MonoBehaviour
 
         gameTime += Time.deltaTime;
 
-        InvokeRepeating("MakeCar_Level1", 0.0f, 1.5f); //자동차가 랜덤으로 나온다.
-        InvokeRepeating("MakeCar_Level2", 0.0f, 3.0f); //오토바이가 랜덤으로 나온다.
-
-        
-
-        /*
-        switch (gameTime / 30.0f) //시간이 30초 지날때마다 난이도 증가
-        {
-            case 0: //게임 1단계
-                InvokeRepeating("MakeCar", 0.0f, 1.0f); //자동차만 랜덤으로 나온다.
-                break;
-            case 1: //30초가 지나면 게임 2단계
-                //자동차와 오토바이가 랜덤으로 나온다
-                break;
-            case 2: //60초가 지나면 게임 3단계
-                //자동차와 오토바이, 덤프트럭이 나온다.
-                break;
-            default: //90초가 지나면 게임 4단계
-                //자동차와 오토바이, 덤프트럭, 불도저가 나온다.
-                break;
-        }
-        */
+        InvokeRepeating("MakeCar", 0.0f, 2.0f); //자동차가 랜덤으로 나온다.
     }
 
     void Update()
@@ -90,31 +76,25 @@ public class GameManager : MonoBehaviour
     }
 
     //자동차 호출하는 메서드
-    void MakeCar_Level1()
+    void MakeCar()
     {
-        float p = Random.Range(0, 10);
-        if (p >= 0 && p < 3) Instantiate(BlueCar);
+        float p = Random.Range(0, 10);  //주기적으로 차가 등장함
+        if (p < 3) Instantiate(BlueCar);
         else if (p >= 3 && p < 7) Instantiate(PurpleCar);
-        else if (p >= 7 && p < 10) Instantiate(YellowCar);
-    }
+        else if (p >= 7) Instantiate(YellowCar);
 
-    //오토바이 호출하는 메서드
-    void MakeCar_Level2()
-    {
-        float p = Random.Range(0, 10);
-        if (p >= 0 && p < 3) Instantiate(MotorBikeRed);
-        else if (p >= 7 && p < 10) Instantiate(motorbikeblack);
-    }
-
-    //덤프트럭 호출하는 메서드
-    void MakeDumpTruck()
-    {
-
-    }
-
-    //불도저 호출하는 메서드
-    void bulldozer()
-    {
+        if(time >= 20) // 가끔씩 오토바이가 등장함
+        {
+            float r = Random.Range(0, 30);
+            if (r < 10) Instantiate(motorbikeblack);
+            if (r > 20) Instantiate(MotorBikeRed);
+        }
+        if(time >= 40) // 가끔씩 덤프트럭이나 불도저가 등장함
+        {
+            float t = Random.Range(0, 30);
+            if (t < 5) Instantiate(Bulldozer);
+            if (t > 20) Instantiate(DumpTruck);
+        }
 
     }
 
@@ -154,38 +134,45 @@ public class GameManager : MonoBehaviour
         endPanel.SetActive(true);
     }
 
-    public void ScoreSet()
+    void ScoreSet(float currentTime, string currentName)
     {
-        float currentTime = PlayerPrefs.GetFloat("recordTime");
         //일단 현재에 저장하고 시작
-        PlayerPrefs.SetFloat("CurrentPlayerTime", currentTime);
+        PlayerPrefs.SetString("currentName", currentName = "chan");
+        PlayerPrefs.SetFloat("CurrentPlayerTime", currentTime = recordTime);
 
         float tmpTime = 0f;
+        string tmpName = "";
 
         for (int i = 0; i < 5; i++)
         {
             //저장된 최고 점수와 이름을 가져오기
-            bestScore[i] = PlayerPrefs.GetFloat(i + "BestScore");
+            bestTime[i] = PlayerPrefs.GetFloat(i + "BestTime");
+            bestName[i] = PlayerPrefs.GetString(i + "BestName");
 
             //현재 점수가 랭킹에 오를 수 있을 때
-            while (bestScore[i] < currentTime)
+            while (bestTime[i] < currentTime)
             {
                 //자리 바꾸기
-                tmpTime = bestScore[i];
-                bestScore[i] = currentTime;
+                tmpTime = bestTime[i];
+                tmpName = bestName[i];
+                bestTime[i] = currentTime;
+                bestName[i] = currentName;
 
                 //랭킹에 저장
                 PlayerPrefs.SetFloat(i + "BestScore", currentTime);
+                PlayerPrefs.SetString(i.ToString() + "BestName", currentName);
 
                 //다음 반복을 위한 준비
                 currentTime = tmpTime;
+                currentName = tmpName;
             }
         }
 
         //랭킹에 맞춰 점수와 이름 저장
         for (int i = 0; i < 5; i++)
         {
-            PlayerPrefs.SetFloat(i + "BestScore", bestScore[i]);
+            PlayerPrefs.SetFloat(i + "BestScore", bestTime[i]);
+            PlayerPrefs.SetString(i.ToString() + "BestName", bestName[i]);
         }
     }
 
@@ -194,6 +181,7 @@ public class GameManager : MonoBehaviour
     {
         //플레이어의 점수 텍스트를 현재 '나'의 점수에 표시
         playerScore.text = PlayerPrefs.GetString("CurrentPlayerScore");
+        
 
         //랭킹에 맞춰 불러온 점수 표시
         for (int i = 0; i < 5; i++)

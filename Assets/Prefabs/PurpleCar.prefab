@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4813013508630669565}
   - component: {fileID: 5572893120985902099}
   - component: {fileID: 8052923947598171490}
-  - component: {fileID: 7868864085957086455}
+  - component: {fileID: 1255168050839916088}
   m_Layer: 0
   m_Name: PurpleCar
   m_TagString: Untagged
@@ -160,7 +160,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7868864085957086455
+--- !u!114 &1255168050839916088
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

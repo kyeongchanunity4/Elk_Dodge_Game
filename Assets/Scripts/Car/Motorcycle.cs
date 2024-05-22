@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Car_Level_1 : MonoBehaviour
+public class Motorcycle : MonoBehaviour
 {
-    float downSpeed = 0.05f;
-    float upSpeed = 0.02f;
+    float downSpeed = 0.13f;
+    float upSpeed = 0.09f;
 
     SpriteRenderer spriteRenderer;
 
@@ -16,31 +16,19 @@ public class Car_Level_1 : MonoBehaviour
         float y = 5.5f;
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        if (x < -1.35f && x >= -2.0f)
+        if (x < 0.0f && x >= -2.0f)
         {
-            x = -1.95f;
+            x = -1.4f;
             transform.position = new Vector2(x, y);
         }
-        else if (x < 0.0f && x >= -1.35f)
+        else if (x < 2.0f && x >= 0.0f)
         {
-            x = -0.75f;
-            transform.position = new Vector2(x, y);
-        }
-        else if (x < 1.35f && x >= 0.0f)
-        {
-            x = 0.75f;
+            x = 1.3f;
             transform.position = new Vector2(x, -y);
-            //자동차가 역방향으로 올때 자동차의 방향 전환+뒤집어서 그림자 방향 맞춰 줌
+            //오토바이가 역방향으로 올때 자동차의 방향 전환+뒤집어서 그림자 방향 맞춰 줌
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, -180));
             spriteRenderer.flipX = true;
 
-        }
-        else if (x <= 2.0f && x >= 1.35f)
-        {
-            x = 1.95f;
-            transform.position = new Vector2(x, -y);
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, -180));
-            spriteRenderer.flipX = true;
         }
     }
 
@@ -58,11 +46,11 @@ public class Car_Level_1 : MonoBehaviour
         }
 
         //차가 화면 밖으로 나가면 삭제
-        if (transform.position.y < -5.6f)
+        if (transform.position.y < -8.0f)
         {
             Destroy(gameObject);
         }
-        else if (transform.position.y > 5.6f)
+        else if (transform.position.y > 8.0f)
         {
             Destroy(gameObject);
         }

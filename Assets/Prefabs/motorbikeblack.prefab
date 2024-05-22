@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5150260417159939380}
   - component: {fileID: 6553609420199988556}
   - component: {fileID: 283110126530396420}
-  - component: {fileID: 3938583047366973705}
+  - component: {fileID: 3384081809083247103}
   m_Layer: 0
   m_Name: motorbikeblack
   m_TagString: Untagged
@@ -160,7 +160,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 1.46}
   m_EdgeRadius: 0
---- !u!114 &3938583047366973705
+--- !u!114 &3384081809083247103
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

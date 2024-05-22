@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 288156087351059530}
   - component: {fileID: 1216425107645876651}
   - component: {fileID: 4322199600977393122}
-  - component: {fileID: 291514465102397415}
+  - component: {fileID: 7994483274059039573}
   m_Layer: 0
   m_Name: DumpTruck
   m_TagString: Untagged
@@ -160,7 +160,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &291514465102397415
+--- !u!114 &7994483274059039573
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5452079418812107545}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a154ccbef6bbfd54b803a22afb7807d4, type: 3}
+  m_Script: {fileID: 11500000, guid: d1afee2615b07604496e91a9b8c6c9a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7782723456631331192

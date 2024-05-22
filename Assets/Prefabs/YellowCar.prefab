@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 3655310054277890107}
   - component: {fileID: 7135250452500619320}
   - component: {fileID: 5748154813257946758}
-  - component: {fileID: 5026708054635221922}
+  - component: {fileID: 2690020700162909644}
   m_Layer: 0
   m_Name: YellowCar
   m_TagString: Untagged
@@ -244,7 +244,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.81, y: 1.77}
   m_EdgeRadius: 0
---- !u!114 &5026708054635221922
+--- !u!114 &2690020700162909644
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

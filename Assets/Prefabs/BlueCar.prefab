@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 4711863476424899609}
   - component: {fileID: 3563522752640271778}
   - component: {fileID: 8263546689150924822}
-  - component: {fileID: 4159108266284858040}
+  - component: {fileID: 4720794337531382921}
   m_Layer: 0
   m_Name: BlueCar
   m_TagString: Untagged
@@ -244,7 +244,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4159108266284858040
+--- !u!114 &4720794337531382921
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
